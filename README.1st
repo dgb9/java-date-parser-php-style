@@ -1,16 +1,17 @@
 1. General
-DateParser is a collection of classes that does Date parsing,
+dateparser package is a collection of classes that does Date parsing,
 basically gets your string representation
 of a date and tries to parse it to a java.util.Date
 
 I did the current development specifically in order to do something similar
-with date parsing in PHP. If you ever worked with PHP, you saw at least
+with strtotime date parsing in PHP. If you ever worked with PHP, you saw at least
 how easy is to parse a string to a date object there.
 
 You write "Jan 12, 2016" and it works, or "next week", or "yesterday"
 or you could write "+2 days" and that would work too.
 
-There weren't many libraries in Java doing the same thing, so I decided to write
+There weren't many libraries in Java doing the same thing, 
+so I decided to write
 one
 
 2. How to use it
@@ -28,14 +29,14 @@ one
  - In case of error, DateParserException is thrown
  - The second parameter, boolean truncate, is true if you want the date to be returned
  without the time component or false otherwise. When writing something like +1 days
- with the truncate parameter false, will get the current system timestamp, add one day
- and return the date obtained following this evaluation
+ with the truncate parameter false, will get the current system timestamp, perform
+ the changes and keep the time component.
 
 3. IMPORTANT !!!!!
 ==================
 The DateParser object is initialized with a parameter of type IDateDescription. An 
 implementation is provided - EnglishDateDescription. If you instantiate the DateParser
-with null as a parameter, EnglishDateDescription will be used. 
+with null as a parameter, EnglishDateDescription is used by default. 
 
 If you want this set of classes to work in your native language, please provide an implementation
 for this interface that will outline how you say in your language words like
