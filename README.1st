@@ -31,8 +31,20 @@ one
  with the truncate parameter false, will get the current system timestamp, add one day
  and return the date obtained following this evaluation
 
+3. IMPORTANT !!!!!
+==================
+The DateParser object is initialized with a parameter of type IDateDescription. An 
+implementation is provided - EnglishDateDescription. If you instantiate the DateParser
+with null as a parameter, EnglishDateDescription will be used. 
 
-3. Please look at the Test.java test code. I ran it as well and the output is as below, first
+If you want this set of classes to work in your native language, please provide an implementation
+for this interface that will outline how you say in your language words like
+"next" "yesterday" etc. You see most of the getters return an array of strings. 
+That gives you the opportunity to call a certain term in many ways. For example
+you see in EnglishDateDescription for "tomorrow" I return both "tom" and "tomorrow"
+just in case you want to type less. 
+
+4. Please look at the Test.java test code. I ran it as well and the output is as below, first
 group is with truncate = true and the second one - the same test but with truncate false:
 
 trying to parse a series with the truncate parameter: true
