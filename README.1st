@@ -1,0 +1,69 @@
+1. General
+DateParser is a collection of classes that does Date parsing,
+basically gets your string representation
+of a date and tries to parse it to a java.util.Date
+
+I did the current development specifically in order to do something similar
+with date parsing in PHP. If you ever worked with PHP, you saw at least
+how easy is to parse a string to a date object there.
+
+You write "Jan 12, 2016" and it works, or "next week", or "yesterday"
+or you could write "+2 days" and that would work too.
+
+There weren't many libraries in Java doing the same thing, so I decided to write
+one
+
+2. How to use it
+
+ It is very simple to use this parser:
+
+ a. Define a DateParser object
+
+ DateParser parser = new DateParser(new EnglishDateDescription());
+
+ b. Just parse
+
+ Date info = parser.parse("next week", true);
+
+ - In case of error, DateParserException is thrown
+ - The second parameter, boolean truncate, is true if you want the date to be returned
+ without the time component or false otherwise. When writing something like +1 days
+ with the truncate parameter false, will get the current system timestamp, add one day
+ and return the date obtained following this evaluation
+
+
+3. Please look at the Test.java test code. I ran it as well and the output is as below, first
+group is with truncate = true and the second one - the same test but with truncate false:
+
+trying to parse a series with the truncate parameter: true
+date for: jan 12, 2015, is: Mon Jan 12 00:00:00 EST 2015
+date for: next day, is: Thu Jun 02 00:00:00 EDT 2016
+date for: +1 days, is: Thu Jun 02 00:00:00 EDT 2016
+date for: +2 days, is: Fri Jun 03 00:00:00 EDT 2016
+date for: tomorrow, is: Thu Jun 02 00:00:00 EDT 2016
+date for: tom, is: Thu Jun 02 00:00:00 EDT 2016
+date for: friday, is: Fri Jun 03 00:00:00 EDT 2016
+date for: today, is: Wed Jun 01 00:00:00 EDT 2016
+date for: yesterday, is: Tue May 31 00:00:00 EDT 2016
+date for: +1 year, is: Thu Jun 01 00:00:00 EDT 2017
+date for: next year, is: Thu Jun 01 00:00:00 EDT 2017
+date for: next days, is: Thu Jun 02 00:00:00 EDT 2016
+date for: previous days, is: Tue May 31 00:00:00 EDT 2016
+error: Cannot parse date: this should be an error
+
+
+trying to parse a series with the truncate parameter: false
+date for: jan 12, 2015, is: Mon Jan 12 00:00:00 EST 2015
+date for: next day, is: Thu Jun 02 15:54:42 EDT 2016
+date for: +1 days, is: Thu Jun 02 15:54:42 EDT 2016
+date for: +2 days, is: Fri Jun 03 15:54:42 EDT 2016
+date for: tomorrow, is: Thu Jun 02 15:54:42 EDT 2016
+date for: tom, is: Thu Jun 02 15:54:42 EDT 2016
+date for: friday, is: Fri Jun 03 15:54:42 EDT 2016
+date for: today, is: Wed Jun 01 15:54:42 EDT 2016
+date for: yesterday, is: Tue May 31 15:54:42 EDT 2016
+date for: +1 year, is: Thu Jun 01 15:54:42 EDT 2017
+date for: next year, is: Thu Jun 01 15:54:42 EDT 2017
+date for: next days, is: Thu Jun 02 15:54:42 EDT 2016
+date for: previous days, is: Tue May 31 15:54:42 EDT 2016
+error: Cannot parse date: this should be an error
