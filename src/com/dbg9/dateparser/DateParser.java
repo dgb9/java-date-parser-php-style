@@ -9,6 +9,10 @@ import java.util.GregorianCalendar;
 public class DateParser {
 	private IDateDescription description; 
 	
+	public DateParser(){
+		this(null);
+	}
+	
 	public DateParser(IDateDescription description){
 		IDateDescription des = null; 
 		
